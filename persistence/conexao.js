@@ -1,7 +1,7 @@
 const conexao = {
     host: 'localhost',
     port: 5434,
-    database: 'crud_produtos',
+    database: 'LIBRARY',
     user: 'postgres',
     password:'Hardc0re.'
 }
