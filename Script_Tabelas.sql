@@ -1,4 +1,4 @@
-CREATE DATABASE biblioteca
+CREATE DATABASE LIBRARY
     WITH 
     OWNER = postgres
     ENCODING = 'UTF8'
