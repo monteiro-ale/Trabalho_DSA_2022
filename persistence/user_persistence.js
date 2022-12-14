@@ -76,9 +76,12 @@ function validateUser(usuario, callback){
                 callback(err.message, undefined);                
             }
             else if (res.rows && res.rows.length > 0 && res.rows[0].nomeusuario == usuario.nomeusuario && res.rows[0].senhausuario == usuario.senhausuario) {
-                const token = jwt.sign({idusuario: 1, nomeusuario: "Wagner"}, 'nelson', {expiresIn: 3600});
-                console.log(token);
-                callback(err,token);
+                callback(err, res.rows[0]);
+            }
+            else if (res.rows && res.rows.length > 0 && res.rows[0].nomeusuario == usuario.nomeusuario && res.rows[0].senhausuario != usuario.senhausuario) {
+                const error = "Senha Incorreta!";
+                console.log(error);
+                callback(error, undefined);
             }
             else {
                 const error = "Usuario nao encontrado";

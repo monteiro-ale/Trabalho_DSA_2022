@@ -18,7 +18,7 @@ exports.insert = (req, res) => {
 exports.validateUser = (req, res) => {
     const usuario = req.body;
   
-    usuarioNegocio.validateUser(usuario, 
+    userService.validateUser(usuario, 
       function(err, usuarioVerificado) {
         if(err){
           res.status(err.numero).json({erro: err.mensagem});
@@ -31,7 +31,7 @@ exports.validateUser = (req, res) => {
   }
 
 exports.listUser = (req, res) => {
-    usuarioNegocio.listUser(function (err, usuarios) {
+    userService.listUser(function (err, usuarios) {
       if(err) {
         res.status(err.numero).json({erro: err.mensagem});
       }
@@ -44,7 +44,7 @@ exports.listUser = (req, res) => {
 exports.validateUser = (req, res) => {
     const usuario = req.body;
   
-    usuarioNegocio.validateUser(usuario, 
+    userService.validateUser(usuario, 
       function(err, usuarioVerificado) {
         if(err){
           res.status(err.numero).json({erro: err.mensagem});
@@ -59,7 +59,7 @@ exports.validateUser = (req, res) => {
 exports.searchById = (req, res) => {
     const id = req.params.id;
 
-    usuarioNegocio.searchById(id, function (err, usuario){
+    userService.searchById(id, function (err, usuario){
       if(err) {
         res.status(err.numero).json({erro: err.mensagem});
       }

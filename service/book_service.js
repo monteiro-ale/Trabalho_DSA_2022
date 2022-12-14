@@ -25,6 +25,7 @@ function searchById(id, callback){
             mensagem: "Identificador Invalido!",
             numero: 400
         }
+        console.log(id);
         callback(erro, undefined);
     }
     else { 

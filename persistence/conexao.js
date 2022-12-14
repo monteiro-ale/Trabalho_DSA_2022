@@ -3,7 +3,7 @@ const conexao = {
     port: 5434,
     database: 'LIBRARY',
     user: 'postgres',
-    password:'postgres'
+    password:'Hardc0re.'
 }
 
 module.exports = {conexao}

@@ -4,7 +4,7 @@ const bookService = require('../service/book_service.js');
 exports.insert = (req, res) => {
     const livro = req.body;
   
-    bookService.insert(livro, 
+    bookService.insertBook(livro, 
       function(err, produtoInserido) {
         if(err){
           res.status(err.numero).json({erro: err.mensagem});
@@ -31,6 +31,7 @@ exports.searchById = (req, res) => {
 
     bookService.searchById(id, function (err, livro){
       if(err) {
+        console.log(err);
         res.status(err.numero).json({erro: err.mensagem});
       }
       else {
