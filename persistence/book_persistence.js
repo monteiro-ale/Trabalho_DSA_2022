@@ -52,7 +52,10 @@ function searchById(id, callback){
                 callback(undefined, livro);
             }
             else {
-                const error = "Livro nao encontrado";
+                const error = { 
+                    mensagem: "Identificador Invalido!",
+                    numero: 400
+                };
                 callback(error, undefined);
             }
 

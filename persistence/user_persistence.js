@@ -73,19 +73,24 @@ function validateUser(usuario, callback){
     cliente.query(sql, values,
         function (err, res) {
             if(err) {
-                callback(err.message, undefined);                
+                callback(err.message, undefined);            
             }
             else if (res.rows && res.rows.length > 0 && res.rows[0].nomeusuario == usuario.nomeusuario && res.rows[0].senhausuario == usuario.senhausuario) {
                 callback(err, res.rows[0]);
             }
             else if (res.rows && res.rows.length > 0 && res.rows[0].nomeusuario == usuario.nomeusuario && res.rows[0].senhausuario != usuario.senhausuario) {
-                const error = "Senha Incorreta!";
-                console.log(error);
-                callback(error, undefined);
+                const erro = { 
+                    mensagem: "Senha Incorreta",
+                    numero: 400
+                };
+                callback(erro, undefined);
             }
             else {
-                const error = "Usuario nao encontrado";
-                callback(error, undefined);
+                const erro = { 
+                    mensagem: "Usuario nao encontrado!",
+                    numero: 400
+                };
+                callback(erro, undefined);
             }
             cliente.end();
 
