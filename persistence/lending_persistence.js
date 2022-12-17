@@ -9,8 +9,8 @@ function lendBook(lending, callback){
     const cliente = new Client(conexao);
     cliente.connect();
 
-    const sql = "INSERT INTO emprestimos (idlivro, idaluno, dataemprestimo, idusuario) VALUES ($1, $2, $3, $4) RETURNING *"
-    const values = [lending.idlivro, lending.idaluno, lending.dataemprestimo, lending.idusuario];
+    const sql = "INSERT INTO emprestimos (idlivro, idaluno, dataemprestimo, idusuario, datadevolucao) VALUES ($1, $2, $3, $4, $5) RETURNING *"
+    const values = [lending.idlivro, lending.idaluno, lending.dataemprestimo, lending.idusuario, lending.datadevolucao];
 
     bookDisponibility(lending.idlivro, function(err, res){
         if (err) {
@@ -20,18 +20,19 @@ function lendBook(lending, callback){
             qtde = res.qtdelivrodisponivel;
             if(qtde == 0) {
                 console.log("Não tem quantidade disponível para empréstimo");
+                const msg  = "Não tem quantidade disponível para empréstimo";
+                callback(err, msg);
                 cliente.end();
             } else {
                 qtde -= 1;
                 cliente.query(sql, values, 
                     function(err, res){
-                    console.log("Livro emprestado!")
+                    console.log("Livro retirado")
                     const sqlReduzQtdeLivro = "UPDATE livros SET qtdelivrodisponivel = $1 WHERE idlivro = $2 RETURNING *";
                     let qtdesql = [qtde, lending.idlivro];
                     cliente.query(sqlReduzQtdeLivro, qtdesql, function(err, res){
-                    console.log("Livros atualizados com sucesso.");
+                    console.log("Banco atualizado");
                     cliente.end();
-                    const mensagem = "O livro " + lending.idLivro + " foi emprestado para o usuário " + lending.idAluno;
                     callback(err, res.rows[0]); 
                 });
                 });
