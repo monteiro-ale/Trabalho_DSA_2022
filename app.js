@@ -1,12 +1,11 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-// const jwt = require('jsonwebtoken');
-// const { JsonWebTokenError } = require('jsonwebtoken');
+// const cors = require('cors');
 
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true })) 
+// app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const bookRoute = require('./routes/book_route');
 app.use('/api/books', bookRoute);
@@ -20,3 +19,4 @@ app.use('/api/lending', lendingRoute);
 app.listen(port, () => {
   console.log(`Servidor está rodando na porta ${port}`)
 })
+
